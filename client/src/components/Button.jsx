@@ -49,8 +49,8 @@ ${({ flex }) =>
     flex: 1;
 `}
 
-${({ small }) =>
-    small &&
+${({ $small }) =>
+    $small &&
     `
 padding: 10px 28px;
 `}
@@ -87,7 +87,7 @@ const button = ({
       type={type}
       isLoading={isLoading}
       flex={flex}
-      small={small}
+      $small={small}
       outlined={outlined}
       full={full}
     >

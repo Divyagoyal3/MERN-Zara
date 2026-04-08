@@ -13,8 +13,8 @@ import {
   deleteFromFavourite,
   getFavourite,
 } from "../../api";
-// import { useDispatch } from "react-redux";
-// import { openSnackbar } from "../../redux/reducers/snackbarSlice";
+import { useDispatch } from "react-redux";
+import { openSnackbar } from "../../redux/reducers/snackbarSlice";
 
 const Card = styled.div`
   width: 250px;
@@ -93,8 +93,7 @@ const Rate = styled.div`
 `;
 
 const Details = styled.div`
-import { useDispatch } from "react-redux";
-import { openSnackbar } from "../../redux/reducers/snackbarSlice";
+
   display: flex;
   gap: 6px;
   flex-direction: column;
@@ -135,7 +134,7 @@ const Percent = styled.div`
 `;
 
 const ProductCard = ({ product }) => {
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(false);
   const [favoriteLoading, setFavoriteLoading] = useState(false);
@@ -150,31 +149,31 @@ const ProductCard = ({ product }) => {
       })
       .catch((err) => {
         setFavoriteLoading(false);
-        // dispatch(
-        //   openSnackbar({
-        //     message: err.message,
-        //     severity: "error",
-        //   })
-        // );
+        dispatch(
+          openSnackbar({
+            message: err.message,
+            severity: "error",
+          })
+        );
       });
   };
   const removeFavorite = async () => {
     setFavoriteLoading(true);
     const token = localStorage.getItem("krist-app-token");
-    // await deleteFromFavourite(token, { productID: product?._id })
-    //   .then((res) => {
-    //     setFavorite(false);
-    //     setFavoriteLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     setFavoriteLoading(false);
-    //     dispatch(
-    //       openSnackbar({
-    //         message: err.message,
-    //         severity: "error",
-    //       })
-    //     );
-    //   });
+    await deleteFromFavourite(token, { productID: product?._id })
+      .then((res) => {
+        setFavorite(false);
+        setFavoriteLoading(false);
+      })
+      .catch((err) => {
+        setFavoriteLoading(false);
+        dispatch(
+          openSnackbar({
+            message: err.message,
+            severity: "error",
+          })
+        );
+      });
   };
   const addCart = async () => {
     const token = localStorage.getItem("krist-app-token");
@@ -183,12 +182,12 @@ const ProductCard = ({ product }) => {
         navigate("/cart");
       })
       .catch((err) => {
-        // dispatch(
-        //   openSnackbar({
-        //     message: err.message,
-        //     severity: "error",
-        //   })
-        // );
+        dispatch(
+          openSnackbar({
+            message: err.message,
+            severity: "error",
+          })
+        );
       });
   };
   const checkFavourite = async () => {
@@ -204,12 +203,12 @@ const ProductCard = ({ product }) => {
       })
       .catch((err) => {
         setFavoriteLoading(false);
-        // dispatch(
-        //   openSnackbar({
-        //     message: err.message,
-        //     severity: "error",
-        //   })
-        // );
+        dispatch(
+          openSnackbar({
+            message: err.message,
+            severity: "error",
+          })
+        );
       });
   };
 

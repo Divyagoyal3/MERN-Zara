@@ -7,9 +7,6 @@ import { Close } from "@mui/icons-material";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 
-
-
-
 const Container = styled.div`
   flex: 1;
   height: 100%;

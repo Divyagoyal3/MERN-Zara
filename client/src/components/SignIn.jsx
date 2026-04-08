@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import TextInput from "./TextInput";
 import Button from "./Button";
-// import { UserSignIn } from "../api";
-// import { useDispatch } from "react-redux";
-// import { loginSuccess } from "../redux/reducers/userSlice";
-// import { openSnackbar } from "../redux/reducers/snackbarSlice";
+import { UserSignIn } from "../api";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/reducers/userSlice";
+import { openSnackbar } from "../redux/reducers/snackbarSlice";
 
 const Container = styled.div`
   width: 100%;
@@ -39,7 +39,7 @@ const TextButton = styled.div`
 `;
 
 const SignIn = () => {
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [buttonLoading, setButtonLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [email, setEmail] = useState("");
@@ -57,38 +57,38 @@ const SignIn = () => {
     setButtonLoading(true);
     setButtonDisabled(true);
     if (validateInputs()) {
-    //   await UserSignIn({ email, password })
-    //     .then((res) => {
-    //       dispatch(loginSuccess(res.data));
-    //       dispatch(
-    //         openSnackbar({
-    //           message: "Login Successful",
-    //           severity: "success",
-    //         })
-    //       );
-        // })
-        // .catch((err) => {
-        //   if (err.response) {
-        //     setButtonLoading(false);
-        //     setButtonDisabled(false);
-        //     alert(err.response.data.message);
-        //     // dispatch(
-        //     //   openSnackbar({
-        //     //     message: err.response.data.message,
-        //     //     severity: "error",
-        //     //   })
-        //     // );
-        //   } else {
-        //     setButtonLoading(false);
-        //     setButtonDisabled(false);
-        //     // dispatch(
-        //     //   openSnackbar({
-        //     //     message: err.message,
-        //     //     severity: "error",
-        //     //   })
-        //     // );
-        //   }
-        // });
+      await UserSignIn({ email, password })
+        .then((res) => {
+          dispatch(loginSuccess(res.data));
+          dispatch(
+            openSnackbar({
+              message: "Login Successful",
+              severity: "success",
+            })
+          );
+        })
+        .catch((err) => {
+          if (err.response) {
+            setButtonLoading(false);
+            setButtonDisabled(false);
+            alert(err.response.data.message);
+            dispatch(
+              openSnackbar({
+                message: err.response.data.message,
+                severity: "error",
+              })
+            );
+          } else {
+            setButtonLoading(false);
+            setButtonDisabled(false);
+            dispatch(
+              openSnackbar({
+                message: err.message,
+                severity: "error",
+              })
+            );
+          }
+        });
     }
     setButtonDisabled(false);
     setButtonLoading(false);

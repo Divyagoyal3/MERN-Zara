@@ -1,11 +1,10 @@
-import styled from 'styled-components';
-import React from 'react'
-import { useState, useEffect } from "react";
-import { getAllProducts } from '../api';
-import HeaderImage from '../utils/Images/Header.png';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import HeaderImage from "../utils/Images/Header.png";
 import { category } from "../utils/data";
-import ProductCategoryCard from '../components/cards/ProductCategoryCard';
-import ProductCard from '../components/cards/ProductCard';
+import ProductCategoryCard from "../components/cards/ProductCategoryCard";
+import ProductCard from "../components/cards/ProductCard";
+import { getAllProducts } from "../api";
 
 const Container = styled.div`
   padding: 20px 30px;
@@ -39,9 +38,10 @@ const Title = styled.div`
   font-size: 28px;
   font-weight: 500;
   display: flex;
-  justify-content: ${({ center }) => (center ? "center" : "space-between")};
+  justify-content: ${({ $center }) => ($center ? "center" : "space-between")};
   align-items: center;
 `;
+
 const CardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -52,9 +52,8 @@ const CardWrapper = styled.div`
   }
 `;
 
-
 const Home = () => {
-     const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
@@ -70,29 +69,31 @@ const Home = () => {
   }, []);
   return (
     <Container>
-        <Section style = {{
-            alignItems: "center"
-        }}>
-            <Img src = {HeaderImage} />
-        </Section>
-        <Section >
-           <Title>Shop by Categories</Title>
-           <CardWrapper>
+      <Section
+        style={{
+          alignItems: "center",
+        }}
+      >
+        <Img src={HeaderImage} />
+      </Section>
+      <Section>
+        <Title>Shop by Categories</Title>
+        <CardWrapper>
           {category.map((category) => (
-            <ProductCategoryCard category={category} />
+            <ProductCategoryCard category={category}  key={category.name}/>
           ))}
         </CardWrapper>
-        </Section>
-         <Section >
-           <Title center>Our BestSellers</Title>
-            <CardWrapper>
+      </Section>
+      <Section>
+        <Title $center>Our Bestseller</Title>
+        <CardWrapper>
           {products.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} key= {product._id} />
           ))}
         </CardWrapper>
-        </Section>
+      </Section>
     </Container>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
